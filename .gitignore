@@ -1,8 +1,4 @@
-# Compiled class file
-*.class
 
-# Log file
-*.log
 
 # BlueJ files
 *.ctxt
@@ -10,15 +6,77 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+
+# ==========================
+# 通用忽略项
+# ==========================
+
+# 编译/打包文件
+*.class
 *.jar
 *.war
-*.nar
 *.ear
+*.nar
 *.zip
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# 日志文件
+*.log
 hs_err_pid*
 replay_pid*
+
+# IDE 和编辑器
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# 构建产物（前端 & 小程序）
+/dist/
+/build/
+/miniprogram-dist/
+/output/
+/out/
+/temp/
+/tmp/
+
+# Node.js 依赖
+node_modules/
+npm-debug.log*
+yarn-error.log*
+yarn.lock
+
+
+# Java
+target/
+out/
+bin/
+.classpath
+.project
+.settings/
+.metadata/
+
+#SpringBoot
+application-*.yml
+
+# 其他常见
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.npmrc
+.pnpm-store
+*.lock
+*.iml
+
+
+
+
+
+# 如果用了 Docker，可以加：
+docker-compose.yml
+Dockerfile
