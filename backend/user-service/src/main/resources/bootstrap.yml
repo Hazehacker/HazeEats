@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: user-service # 修正服务名称
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${eats.nacos.server-addr}
+        username: ${eats.nacos.username}
+        password: ${eats.nacos.password}
+        namespace: ${eats.nacos.namespace:public}
+      config:
+        server-addr: ${eats.nacos.server-addr}
+        username: ${eats.nacos.username}
+        password: ${eats.nacos.password}
+        namespace: ${eats.nacos.namespace:public}
+        file-extension: yaml # 文件后缀名
+        refresh-enabled: true # 启用配置自动刷新
+        shared-configs: # 共享配置
+          - dataId: shared-jdbc.yaml # 共享jdbc/mp配置
+            refresh: true
+          - dataId: shared-log.yaml # 共享日志配置
+            refresh: true
+          - dataId: shared-swagger.yaml # 接口文档配置
+            refresh: true
+          - dataId: shared-redis.yaml # 共享redis配置
+            refresh: true
+          - dataId: shared-jwt-properties.yaml # 共享jwt配置
+            refresh: true
+          - dataId: third-service.yaml # 第三方配置
+            refresh: true

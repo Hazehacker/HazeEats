@@ -1,0 +1,64 @@
+server:
+  port: 8083
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+
+# 日志级别在本地设置
+logging:
+  level:
+    top:
+      hazenix:
+        mapper: debug
+        service: info
+        controller: debug
+aspect:
+  log-controller:
+    enabled: ${aspect.log-controller.enabled}
+  log-service:
+    enabled: ${aspect.log-service.enabled}
+
+
+
+
+
+
+
+
+
+# 【被common模块的JwtProperties读取，放到共享配置】
+#hazeeats:
+#  jwt:
+#    # 设置jwt签名加密时使用的秘钥
+#    admin-secret-key: ${eats.jwt.admin-secret-key}
+#    # 设置jwt过期时间
+#    admin-ttl: 43200000
+#    # 设置前端传递过来的令牌名称
+#    admin-token-name: token
+#
+#    # 用户端jwt令牌相关配置
+#    # 设置jwt签名加密时使用的秘钥
+#    user-secret-key: itheima
+#    # 设置jwt过期时间
+#    user-ttl: 43200000
+#    # 设置前端传递过来的令牌名称
+#    user-token-name: authentication
+#  wechat:
+#    appid: ${hazeeats.wechat.appid}
+#    secret: ${hazeeats.wechat.secret}
+#    mchid: ${hazeeats.wechat.mchid}
+#    mchSerialNo: ${hazeeats.wechat.mchSerialNo}
+#    privateKeyFilePath: ${hazeeats.wechat.privateKeyFilePath}
+#    apiV3Key: ${hazeeats.wechat.apiV3Key}
+#    weChatPayCertFilePath: ${hazeeats.wechat.weChatPayCertFilePath}
+#    notifyUrl: ${hazeeats.wechat.notifyUrl}
+#    refundNotifyUrl: ${hazeeats.wechat.refundNotifyUrl}
+#
+#  alioss:
+#    endpoint: ${hazeeats.alioss.endpoint}
+#    access-key-id: ${hazeeats.alioss.access-key-id}
+#    access-key-secret: ${hazeeats.alioss.access-key-secret}
+#    bucket-name: ${hazeeats.alioss.bucket-name}
