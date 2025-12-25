@@ -52,4 +52,4 @@ spring:
         - id: shop-service
           uri: lb://shop-service
           predicates:
-            - Path=/admin/common/**,/admin/shop/**
+            - Path=/admin/common/**,/admin/shop/**,/user/category/**,/admin/category/**
