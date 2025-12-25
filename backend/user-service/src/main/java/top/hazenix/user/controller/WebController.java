@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.hazenix.constant.JwtClaimsConstant;
-import top.hazenix.dto.EmployeeLoginDTO;
-import top.hazenix.entity.Employee;
 import top.hazenix.properties.JwtProperties;
 import top.hazenix.result.Result;
-import top.hazenix.service.EmployeeService;
+import top.hazenix.user.domain.dto.EmployeeLoginDTO;
+import top.hazenix.user.domain.entity.Employee;
+import top.hazenix.user.domain.vo.EmployeeLoginVO;
+import top.hazenix.user.service.EmployeeService;
 import top.hazenix.utils.JwtUtil;
-import top.hazenix.vo.EmployeeLoginVO;
+
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,10 +1,11 @@
 package top.hazenix.user.service;
 
-import top.hazenix.dto.EmployeeDTO;
-import top.hazenix.dto.EmployeeLoginDTO;
-import top.hazenix.dto.EmployeePageQueryDTO;
-import top.hazenix.entity.Employee;
+
 import top.hazenix.result.PageResult;
+import top.hazenix.user.domain.dto.EmployeeDTO;
+import top.hazenix.user.domain.dto.EmployeeLoginDTO;
+import top.hazenix.user.domain.dto.EmployeePageQueryDTO;
+import top.hazenix.user.domain.entity.Employee;
 
 public interface EmployeeService {
 

@@ -1,5 +1,5 @@
 server:
-  port: 8087
+  port: 8080
 
 spring:
   profiles:
@@ -12,9 +12,10 @@ logging:
   level:
     top:
       hazenix:
-        mapper: debug
-        service: info
-        controller: debug
+        dish:
+          mapper: debug
+          service: info
+          controller: debug
 aspect:
   log-controller:
     enabled: ${aspect.log-controller.enabled}

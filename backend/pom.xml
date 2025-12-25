@@ -45,6 +45,7 @@
         <!--第三方接口-->
         <wechatpay-apache-httpclient>0.4.8</wechatpay-apache-httpclient>
 
+
     </properties>
     <dependencyManagement>
 

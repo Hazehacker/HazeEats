@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: gateway # 修正服务名称
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${eats.nacos.server-addr}
+        username: ${eats.nacos.username}
+        password: ${eats.nacos.password}
+        namespace: ${eats.nacos.namespace:public}
+      config:
+        server-addr: ${eats.nacos.server-addr}
+        username: ${eats.nacos.username}
+        password: ${eats.nacos.password}
+        namespace: ${eats.nacos.namespace:public}
+        file-extension: yaml # 文件后缀名
+        refresh-enabled: true # 启用配置自动刷新
+        shared-configs: # 共享配置
+          - dataId: shared-jdbc.yaml # 共享jdbc/mp配置
+            refresh: true
+
+
+    gateway:
+      # 配置路由规则
+      routes:
+        - id: cart-service
+          uri: lb://cart-service
+          predicates:
+            - Path=/user/shoppingCart/**
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/addressBook/**,/admin/employee/**,/user/user/**,/admin/login
+        - id: dish-service
+          uri: lb://dish-service
+          predicates:
+            - Path=/admin/dish/**,/user/dish/**,/admin/setmeal/**,/admin/setmeal/**
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/admin/order/**,/user/order/**
+        - id: pay-service
+          uri: lb://pay-service
+          predicates:
+            - Path=/notify/**
+        - id: report-service
+          uri: lb://report-service
+          predicates:
+            - Path=/admin/report/**,/admin/workspace/**
+        - id: shop-service
+          uri: lb://shop-service
+          predicates:
+            - Path=/admin/common/**,/admin/shop/**
