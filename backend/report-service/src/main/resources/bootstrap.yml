@@ -1,6 +1,6 @@
 spring:
   application:
-    name: pay-service # 修正服务名称
+    name: report-service # 修正服务名称
   profiles:
     active: dev
   cloud:

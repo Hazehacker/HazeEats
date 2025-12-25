@@ -62,7 +62,7 @@ public interface OrderClient {
      * @param map
      * @return
      */
-    @GetMapping("/countByMap")
-    public Integer countByMap(Map map);
+    @GetMapping("/admin/order/countByMap")
+    public Integer countByMap(@RequestParam Map map);
     // -----------------------------------------------------------
 }

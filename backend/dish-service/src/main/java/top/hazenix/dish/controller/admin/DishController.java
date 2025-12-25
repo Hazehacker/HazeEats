@@ -2,6 +2,7 @@ package top.hazenix.dish.controller.admin;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -151,6 +152,16 @@ public class DishController {
     @GetMapping("/countByMap")
     public Integer countDishesByMap(Map map){
         return dishMapper.countByMap(map);
+    }
+
+    /**
+     * 根据分类id查询菜品数量
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/countByCategory")
+    public Integer countByCategoryId(Long categoryId){
+        return dishMapper.countByCategoryId(categoryId);
     }
 
 

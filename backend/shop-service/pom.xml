@@ -26,11 +26,11 @@
         </dependency>
 
         <!--api模块-->
-<!--        <dependency>-->
-<!--            <groupId>top.hazenix</groupId>-->
-<!--            <artifactId>eats-api</artifactId>-->
-<!--            <version>1.0.1-SNAPSHOT</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>top.hazenix</groupId>
+            <artifactId>eats-api</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!--java操作redis的依赖-->
         <dependency>

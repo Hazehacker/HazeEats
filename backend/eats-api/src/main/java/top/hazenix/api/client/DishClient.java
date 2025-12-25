@@ -36,7 +36,7 @@ public interface DishClient {
      * @return
      */
     @GetMapping("/admin/dish/countByMap")
-    public Integer countDishesByMap(Map map);
+    public Integer countDishesByMap(@RequestParam Map map);
 
     /**
      * 根据条件统计套餐数量
@@ -44,5 +44,22 @@ public interface DishClient {
      * @return
      */
     @GetMapping("/admin/setmeal/countByMap")
-    public Integer countSetmealsByMap(Map map);
+    public Integer countSetmealsByMap(@RequestParam Map map);
+
+    /**
+     * 根据分类id查询菜品数量
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/admin/dish/countByCategory")
+    public Integer countDishesByCategoryId(@RequestParam Long categoryId);
+
+
+    /**
+     * 根据分类id查询套餐的数量
+     * @param id
+     * @return
+     */
+    @GetMapping("/admin/setmeal/countByCategoryId")
+    public Integer countSetmealsByCategoryId(Long id);
 }

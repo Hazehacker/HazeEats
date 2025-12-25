@@ -1,6 +1,7 @@
 package top.hazenix.dish.controller.admin;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
@@ -105,6 +106,16 @@ public class SetmealController {
     @GetMapping("/countByMap")
     public Integer countByMap(Map map){
         return setmealMapper.countByMap(map);
+    }
+
+    /**
+     * 根据分类id查询套餐的数量
+     * @param id
+     * @return
+     */
+    @GetMapping("/countByCategoryId")
+    public Integer countByCategoryId(Long id){
+        return setmealMapper.countByCategoryId(id);
     }
 
 
