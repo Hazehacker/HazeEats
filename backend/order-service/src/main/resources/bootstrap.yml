@@ -30,3 +30,5 @@ spring:
             refresh: true
           - dataId: third-wechat.yaml # 微信配置
             refresh: true
+          - dataId: shared-mq.yaml
+            refresh: true

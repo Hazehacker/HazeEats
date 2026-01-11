@@ -209,7 +209,8 @@ public class OrderServiceImpl implements OrderService {
                 .checkoutTime(LocalDateTime.now())
                 .build();
 
-        orderMapper.update(orders);
+        orderMapper.update(orders);// 包含了判断和更新的逻辑，状态不是TO_BE_CONFIRMED的订单不会被更新，保证了幂等性
+
         //通过websocket闲客户端浏览器推送消息
         Map map = new HashMap();
         map.put("type",1);//1表示来电提醒，2表示用户催单

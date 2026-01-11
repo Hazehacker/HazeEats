@@ -26,3 +26,5 @@ spring:
             refresh: true
           - dataId: shared-jwt-properties.yaml # 共享jwt配置
             refresh: true
+          - dataId: shared-mq.yaml
+            refresh: true

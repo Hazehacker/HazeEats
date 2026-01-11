@@ -6,7 +6,14 @@ spring:
     active: dev
   main:
     allow-circular-references: true
-
+  rabbitmq:
+    connection-timeout: 1s
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000ms
+        multiplier: 2
+        max-attempts: 6
 # 日志级别在本地设置
 logging:
   level:

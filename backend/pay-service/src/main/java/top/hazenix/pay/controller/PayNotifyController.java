@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.wechat.pay.contrib.apache.httpclient.util.AesUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.entity.ContentType;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * 支付回调相关接口
@@ -30,6 +33,11 @@ public class PayNotifyController {
     private OrderClient orderClient;
     @Autowired
     private WeChatProperties weChatProperties;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+
+    private static final ExecutorService MESSAGE_SEND_EXECUTOR = Executors.newFixedThreadPool(10);
 
     /**
      * 支付成功回调
@@ -54,8 +62,18 @@ public class PayNotifyController {
         log.info("微信支付交易号：{}", transactionId);
 
         //业务处理，修改订单状态、来单提醒
-        orderClient.paySuccess(outTradeNo);
+//        orderClient.paySuccess(outTradeNo);
 
+        // 异步发送消息到MQ，避免阻塞当前请求处理
+        MESSAGE_SEND_EXECUTOR.submit(() -> {
+            try {
+                rabbitTemplate.convertAndSend("pay.direct", "pay.success", outTradeNo);
+                log.info("支付成功消息已发送至MQ，订单号：{}", outTradeNo);
+            } catch (Exception e) {
+                log.error("发送支付成功消息到MQ失败，订单号：{}，错误信息：{}", outTradeNo, e.getMessage(), e);
+                // 这里可以考虑添加补偿机制，如重试或记录失败消息到数据库后续处理
+            }
+        });
         //给微信响应
         responseToWeixin(response);
     }
