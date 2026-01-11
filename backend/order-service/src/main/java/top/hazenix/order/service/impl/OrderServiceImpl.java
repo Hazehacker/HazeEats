@@ -8,6 +8,10 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessagePostProcessor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +72,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private BaiduGeoUtil baiduGeoUtil;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     @Transactional
@@ -148,6 +155,14 @@ public class OrderServiceImpl implements OrderService {
 
         //清空用户的购物车数据
         cartClient.clean();
+        // 发送消息给延迟队列，用于实现订单超时取消
+        rabbitTemplate.convertAndSend("delay.direct", "pay.delay", order.getNumber(), new MessagePostProcessor() {
+            @Override
+            public Message postProcessMessage(Message message) throws AmqpException {
+                message.getMessageProperties().setDelay(60000 * 60 * 15); // 延迟15分钟
+                return message;
+            }
+        });
         //封装VO对象并返回
         OrderSubmitVO orderSubmitVO = OrderSubmitVO.builder()
                 .id(order.getId())
