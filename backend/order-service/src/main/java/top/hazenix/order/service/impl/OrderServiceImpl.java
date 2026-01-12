@@ -156,10 +156,10 @@ public class OrderServiceImpl implements OrderService {
         //清空用户的购物车数据
         cartClient.clean();
         // 发送消息给延迟队列，用于实现订单超时取消
-        rabbitTemplate.convertAndSend("delay.direct", "pay.delay", order.getNumber(), new MessagePostProcessor() {
+        rabbitTemplate.convertAndSend(MessageConstant.DELAY_EXCHANGE, MessageConstant.ORDER_DELAY_ROUTING_KEY, order.getId(), new MessagePostProcessor() {
             @Override
             public Message postProcessMessage(Message message) throws AmqpException {
-                message.getMessageProperties().setDelay(60000 * 60 * 15); // 延迟15分钟
+                message.getMessageProperties().setDelay(Orders.expire); // 延迟15分钟
                 return message;
             }
         });

@@ -35,6 +35,11 @@ public class Orders implements Serializable {
     public static final Integer PAID = 1;
     public static final Integer REFUND = 2;
 
+    /**
+     * 订单超时取消时间
+     */
+    public static final Integer expire = 60000 * 60 * 15;
+
     private static final long serialVersionUID = 1L;
 
     private Long id;

@@ -24,4 +24,10 @@ public class MessageConstant {
     public static final String ORDER_STATUS_ERROR = "订单状态错误";
     public static final String ORDER_NOT_FOUND = "订单不存在";
     public static final String ALREADY_EXISTS = "已存在";
+    public static final String ORDER_DELAY_QUEUE = "order.delay.queue";
+    public static final String DELAY_EXCHANGE = "delay.direct";
+    public static final String ORDER_DELAY_ROUTING_KEY = "order.delay";
+    public static final String PAY_EXCHANGE = "pay.direct";
+    public static final String PAY_SUCCESS_QUEUE = "order.pay.success.queue";
+    public static final String PAY_SUCCESS_ROUTING_KEY = "pay.success";
 }

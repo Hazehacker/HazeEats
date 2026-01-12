@@ -10,6 +10,7 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import top.hazenix.constant.MessageConstant;
 import top.hazenix.order.service.OrderService;
 
 @Component
@@ -20,11 +21,11 @@ public class PayStatusListener {
 
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(
-                    value = "order.pay.success.queue",
+                    value = MessageConstant.PAY_SUCCESS_QUEUE,
                     durable = "true"
             ),
-            exchange = @Exchange(value = "pay.direct", type = "direct"),
-            key = "pay.success"
+            exchange = @Exchange(value = MessageConstant.PAY_EXCHANGE, type = "direct"),
+            key = MessageConstant.PAY_SUCCESS_ROUTING_KEY
     ))
     public void paySuccess(Message message) {
         log.info("接收到消息：{}", new String(message.getBody()));
